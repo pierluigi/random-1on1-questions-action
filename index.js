@@ -45,7 +45,9 @@ ${questions}
 
 try {
   const numQuestions = parseInt(core.getInput("num-questions"));
-  log(`Hello ${numQuestions}!`);
+  const label = parseInt(core.getInput("label"));
+  log(`Hello ${label}!`);
+  log("Context", github.context);
   core.setOutput("response", generateQuestions(numQuestions));
 } catch (error) {
   core.setFailed(error.message);
