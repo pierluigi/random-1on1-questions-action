@@ -19,7 +19,7 @@ jobs:
         # label: "1 to 1"
       - uses: actions/github-script@0.3.0
         name: Post reply
-        if: ${{ steps.questions.outcome == "success" }}
+        if: ${{ steps.questions.outcome == 'success' }}
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           response: ${{steps.questions.outputs.response }}
