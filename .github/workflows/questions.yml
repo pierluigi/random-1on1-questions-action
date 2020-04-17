@@ -1,17 +1,18 @@
 on:
   issues:
     types: [labeled]
-defaults:
+env:
   label: "1on1-test" #
 jobs:
   questions:
-    if: github.event.label.name == defaults.label
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: Generate random questions
     steps:
       - name: Check out repository
+        if: github.event.label.name == env.label
         uses: actions/checkout@v2
       - name: Generate questions
+        if: github.event.label.name == env.label
         id: questions
         uses: ./
         with:
