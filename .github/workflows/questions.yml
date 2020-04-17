@@ -1,9 +1,11 @@
 on:
   issues:
     types: [labeled]
-
+env:
+  label: "1on1-test"
 jobs:
   questions:
+    if: github.event.label.name = env.label
     runs-on: ubuntu-latest
     name: A job to say hello
     steps:
@@ -13,9 +15,9 @@ jobs:
         id: questions
         uses: ./
         # Use with to override defaults:
-        # with:
-        # num-questions: "2"
-        # label: "1 to 1"
+        with:
+          # num-questions: "2"
+          label: ${{env.label}} # to override the default
       - uses: actions/github-script@0.3.0
         name: Post reply
         if: ${{ steps.questions.outcome == 'success' }}

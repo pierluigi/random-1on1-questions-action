@@ -46,9 +46,6 @@ ${questions}
 
 try {
   const numQuestions = parseInt(core.getInput("num-questions"));
-  const label = core.getInput("label");
-  if (get(github, "context.payload.label.name", "") != label)
-    throw new Error(`Label not found: ${label}`);
   core.setOutput("response", generateQuestions(numQuestions));
 } catch (error) {
   core.setFailed(error.message);
