@@ -43,7 +43,7 @@ ${questions}
 
 try {
   // `who-to-greet` input defined in action metadata file
-  const numQuestions = core.getInput("num-questions");
+  const numQuestions = parseInt(core.getInput("num-questions"));
   log(`Hello ${numQuestions}!`);
   // Get the JSON webhook payload for the event that triggered the workflow
   // const payload = JSON.stringify(github.context.payload, undefined, 2);
