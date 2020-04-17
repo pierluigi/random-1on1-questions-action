@@ -3,6 +3,8 @@ const groupBy = require("lodash/groupBy");
 const each = require("lodash/each");
 const random = require("lodash/random");
 const chalk = require("chalk");
+const core = require("@actions/core");
+const github = require("@actions/github");
 
 const NUM_Q_PER_CATEGORY = 1;
 
@@ -39,4 +41,15 @@ ${questions}
 `;
 });
 
-log(response);
+try {
+  // `who-to-greet` input defined in action metadata file
+  const numQuestions = core.getInput("num-questions");
+  console.log(`Hello ${numQuestions}!`);
+  // const time = new Date().toTimeString();
+  // core.setOutput("time", time);
+  // Get the JSON webhook payload for the event that triggered the workflow
+  const payload = JSON.stringify(github.context.payload, undefined, 2);
+  console.log(`The event payload: ${payload}`);
+} catch (error) {
+  core.setFailed(error.message);
+}
