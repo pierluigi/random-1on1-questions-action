@@ -5,7 +5,7 @@ env:
   label: "1on1-test"
 jobs:
   questions:
-    if: github.event.label.name = env.label
+    if: github.event.label.name == env.label
     runs-on: ubuntu-latest
     name: A job to say hello
     steps:
