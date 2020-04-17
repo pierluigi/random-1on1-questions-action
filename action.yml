@@ -5,6 +5,10 @@ inputs:
     description: "How many questions to be generated per category"
     required: true
     default: "3"
+  label: # the label that when applied triggers this workflow
+    description: "The label to trigger this workflow"
+    required: true
+    default: "1on1"
 outputs:
   respone:
     description: "The issue response"

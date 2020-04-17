@@ -1,7 +1,10 @@
-on: [issues]
+on:
+  issues:
+    types: [labeled]
 
 jobs:
   questions:
+    if: contains(github.event.issue.labels.*.name, steps.questions.inputs.label)
     runs-on: ubuntu-latest
     name: A job to say hello
     steps:
@@ -10,8 +13,10 @@ jobs:
       - name: Generate questions
         id: questions
         uses: ./
-        with:
-          num-questions: "2"
+        # Use with to override defaults:
+        # with:
+        # num-questions: "2"
+        # label: "1 to 1"
       - name: Post reply
         run: echo "${{ steps.questions.outputs.response }}"
       - uses: actions/github-script@0.3.0

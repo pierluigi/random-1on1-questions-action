@@ -15,11 +15,11 @@ function generateQuestions(numQuestions) {
 
   const qByCategory = groupBy(q, q => q.category);
   let response = `
-  # Random 1 on 1 Questions
+# Random 1 on 1 Questions
   
-  👋🏻 Hiya! This is a randomly picked selection of 1on1 questions, dived by category. Feel free to use whatever is most relevant and only if it makese sense!
+👋🏻 Hiya! This is a randomly picked selection of 1on1 questions, dived by category. Feel free to use whatever is most relevant and only if it makese sense!
   
-  `;
+`;
   each(qByCategory, (el, k) => {
     let qIndices = [];
     while (qIndices.length < numQuestions) {
@@ -31,13 +31,13 @@ function generateQuestions(numQuestions) {
     let questions = "";
     qIndices.forEach(id => {
       questions += `- ${el[id].question}
-      `;
+`;
     });
 
     response += `
-  ## ${chalk.bold(k)}
-  ${questions}
-  `;
+## ${chalk.bold(k)}
+${questions}
+`;
   });
 
   return response;
