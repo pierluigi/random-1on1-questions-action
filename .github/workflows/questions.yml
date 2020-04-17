@@ -18,10 +18,11 @@ jobs:
         if: success()
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
+          response: ${{steps.questions.outputs.response }}
           script: |
             github.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: steps.questions.outputps.response
+              body: process.env.INPUT_RESPONSE
             })
