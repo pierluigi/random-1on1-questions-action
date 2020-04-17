@@ -4,7 +4,7 @@ inputs:
   num-questions: # amount of questions per category
     description: "How many questions to be generated per category"
     required: true
-    default: "3"
+    default: "1"
   label: # the label that when applied triggers this workflow
     description: "The label to trigger this workflow"
     required: true
