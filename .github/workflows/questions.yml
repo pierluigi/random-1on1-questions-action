@@ -8,6 +8,6 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v2
     - name: Hello world action step
-      uses: ./.github/actions/questions
+      uses: ./
       with:
         num-questions: '12'
