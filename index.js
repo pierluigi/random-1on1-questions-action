@@ -2,6 +2,7 @@ const fs = require("fs");
 const groupBy = require("lodash/groupBy");
 const each = require("lodash/each");
 const random = require("lodash/random");
+const get = require("lodash/get");
 const chalk = require("chalk");
 const core = require("@actions/core");
 const github = require("@actions/github");
@@ -46,8 +47,8 @@ ${questions}
 try {
   const numQuestions = parseInt(core.getInput("num-questions"));
   const label = parseInt(core.getInput("label"));
-  log(`Hello ${label}!`);
-  log("Context", github.context);
+  if (get(github, "context.payload.issue.labels", []).indexOf(label) < 0)
+    throw new Error(`Label not found: ${label}`);
   core.setOutput("response", generateQuestions(numQuestions));
 } catch (error) {
   core.setFailed(error.message);
