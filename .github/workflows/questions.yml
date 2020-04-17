@@ -5,9 +5,12 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to say hello
     steps:
-    - name: Check out repository
-      uses: actions/checkout@v2
-    - name: Hello world action step
-      uses: ./
-      with:
-        num-questions: '12'
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Generate questions
+        id: questions
+        uses: ./
+        with:
+          num-questions: "2"
+      - name: Post reply
+        run: echo "${{ steps.questions.outputs.response }}"

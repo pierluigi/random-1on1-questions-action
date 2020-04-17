@@ -5,6 +5,9 @@ inputs:
     description: "How many questions to be generated per category"
     required: true
     default: "3"
+outputs:
+  respone:
+    description: "The issue response"
 runs:
   using: "node12"
   main: "index.js"
