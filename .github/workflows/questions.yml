@@ -14,3 +14,9 @@ jobs:
           num-questions: "2"
       - name: Post reply
         run: echo "${{ steps.questions.outputs.response }}"
+      - uses: actions/github-script@0.3.0
+        if: success()
+        with:
+          github-token: ${{github.token}}
+          script: |
+            github.issues.createComment({...context.issue, steps.questions.outputs.response })
