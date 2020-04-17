@@ -2,17 +2,16 @@ on:
   issues:
     types: [labeled]
 env:
-  label: "1on1-test" #
+  label: "1on1-test" # Set this to be able to skip the steps based on the label
 jobs:
   questions:
+    if: github.event.label.name == env.label
     runs-on: ubuntu-latest
     name: Generate random questions
     steps:
       - name: Check out repository
-        if: github.event.label.name == env.label
         uses: actions/checkout@v2
       - name: Generate questions
-        if: github.event.label.name == env.label
         id: questions
         uses: ./
         with:
