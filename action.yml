@@ -1,5 +1,11 @@
-name: "Random 1 on 1 Questions"
+name: 1on1-questions-action
 description: "Attach a list of random 1 on 1 questions to an issue"
+author: Pierluigi Cau
+
+branding:
+  icon: help-circle
+  color: green
+
 inputs:
   num-questions: # amount of questions per category
     description: "How many questions to be generated per category"

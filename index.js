@@ -1,14 +1,16 @@
-const fs = require("fs");
-const groupBy = require("lodash/groupBy");
-const each = require("lodash/each");
-const random = require("lodash/random");
-const get = require("lodash/get");
-const chalk = require("chalk");
-const core = require("@actions/core");
-const github = require("@actions/github");
+const fs = require("fs"),
+  groupBy = require("lodash/groupBy"),
+  each = require("lodash/each"),
+  random = require("lodash/random"),
+  chalk = require("chalk"),
+  core = require("@actions/core"),
+  github = require("@actions/github");
 
 const qFile = "./questions.json";
-const log = console.log;
+
+// TODO
+// - fetch questions from original repo
+// - implement comment posting internally
 
 function generateQuestions(numQuestions) {
   var q;
@@ -18,7 +20,7 @@ function generateQuestions(numQuestions) {
   let response = `
 # Random 1 on 1 Questions
   
-👋🏻 Hiya! This is a randomly picked selection of 1on1 questions, dived by category. Feel free to use whatever is most relevant and only if it makese sense!
+👋🏻 Hiya! This is a randomly picked selection of 1 on 1 questions (from a total of ${q.length}), dived by category. Feel free to use whatever is most relevant and only if it makese sense!
   
 `;
   each(qByCategory, (el, k) => {
@@ -46,7 +48,22 @@ ${questions}
 
 try {
   const numQuestions = parseInt(core.getInput("num-questions"));
-  core.setOutput("response", generateQuestions(numQuestions));
+  const response = generateQuestions(numQuestions);
+  core.setOutput("response", response);
+  core.info("Response", response);
+
+  const context = github.context,
+    owner = context.repo.owner,
+    client = new github.GitHub(token);
+
+  const commentResponse = await client.issues.createComment({
+    issue_number: context.issue.number,
+    labels: [label],
+    owner,
+    body: response
+  });
+
+  core.debug(JSON.stringify(commentResponse.data));
 } catch (error) {
   core.setFailed(error.message);
 }
