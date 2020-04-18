@@ -14,7 +14,7 @@ async function run() {
       owner = context.repo.owner,
       repo = context.repo.repo,
       client = new github.GitHub(token);
-
+    core.info(context.issue);
     if (context.issue.labels.find((l) => l.name == label)) {
       const body = utils.generateQuestions(numCategories, numQuestions);
       core.info(body);
