@@ -1,34 +1,20 @@
 on:
   issues:
-    types: [labeled]
+    types: [opened]
 env:
   label: "1on1-test" # Set this to be able to skip the steps based on the label
 jobs:
   questions:
-    # if: github.event.label.name == env.label # but what if env isnt set?
     runs-on: ubuntu-latest
     name: Generate random questions
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
       - name: Generate questions
-        if: github.event.label.name == env.label # but what if env isnt set?
+        if: contains(github.event.issue.labels.*.name, env.label)
         id: questions
         uses: ./
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           # num-questions: "2"
-          label: ${{env.label}} # to override the default
-      # - uses: actions/github-script@0.3.0
-      #   name: Post reply
-      #   if: ${{ steps.questions.outcome == 'success' }}
-      #   with:
-      #     github-token: ${{secrets.GITHUB_TOKEN}}
-      #     response: ${{steps.questions.outputs.response }}
-      #     script: |
-      #       github.issues.createComment({
-      #         issue_number: context.issue.number,
-      #         owner: context.repo.owner,
-      #         repo: context.repo.repo,
-      #         body: process.env.INPUT_RESPONSE
-      #       })
+          label: ${{env.label}}

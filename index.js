@@ -10,13 +10,12 @@ const qFile = "./questions.json";
 
 // TODO
 // - fetch questions from original repo
-// - implement comment posting internally
 
 function generateQuestions(numQuestions) {
   var q;
   var q = JSON.parse(fs.readFileSync(qFile, "utf8"));
 
-  const qByCategory = groupBy(q, q => q.category);
+  const qByCategory = groupBy(q, (q) => q.category);
   let response = `
 # Random 1 on 1 Questions
   
@@ -32,7 +31,7 @@ function generateQuestions(numQuestions) {
     }
 
     let questions = "";
-    qIndices.forEach(id => {
+    qIndices.forEach((id) => {
       questions += `- ${el[id].question}
 `;
     });
@@ -51,7 +50,7 @@ async function run() {
     const numQuestions = parseInt(core.getInput("num-questions"));
     const response = generateQuestions(numQuestions);
     core.setOutput("response", response);
-    core.info("Response", response);
+    core.info(response);
 
     const token = core.getInput("github-token", { required: true }),
       context = github.context,
@@ -64,7 +63,7 @@ async function run() {
       issue_number,
       repo,
       owner,
-      body: response
+      body: response,
     });
 
     core.debug(JSON.stringify(commentResponse.data));
