@@ -53,7 +53,8 @@ async function run() {
     core.setOutput("response", response);
     core.info("Response", response);
 
-    const context = github.context,
+    const token = core.getInput("github-token", { required: true }),
+      context = github.context,
       owner = context.repo.owner,
       client = new github.GitHub(token);
 
