@@ -55,12 +55,14 @@ async function run() {
 
     const token = core.getInput("github-token", { required: true }),
       context = github.context,
+      issue_number = context.issue.number,
       owner = context.repo.owner,
+      repo = context.repo.repo,
       client = new github.GitHub(token);
 
     const commentResponse = await client.issues.createComment({
-      issue_number: context.issue.number,
-      labels: [label],
+      issue_number,
+      repo,
       owner,
       body: response
     });
