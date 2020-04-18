@@ -1,4 +1,5 @@
 const fs = require("fs"),
+  _ = require("lodash"),
   groupBy = require("lodash/groupBy"),
   each = require("lodash/each"),
   random = require("lodash/random"),
@@ -11,10 +12,8 @@ const qFile = "./questions.json";
 // TODO
 // - fetch questions from original repo
 
-function generateQuestions(numQuestions) {
-  var q;
+function generateQuestions(numCategories, numQuestions) {
   var q = JSON.parse(fs.readFileSync(qFile, "utf8"));
-
   const qByCategory = groupBy(q, (q) => q.category);
   let response = `
 # Random 1 on 1 Questions
@@ -47,10 +46,10 @@ ${questions}
 
 async function run() {
   try {
-    const numQuestions = parseInt(core.getInput("num-questions"));
-    const response = generateQuestions(numQuestions);
-    core.setOutput("response", response);
-    core.info(response);
+    const numCategories = parseInt(core.getInput("num-categories"), 10);
+    const numQuestions = parseInt(core.getInput("num-questions"), 10);
+    const body = generateQuestions(numCategories, numQuestions);
+    core.info(body);
 
     const token = core.getInput("github-token", { required: true }),
       context = github.context,
@@ -63,7 +62,7 @@ async function run() {
       issue_number,
       repo,
       owner,
-      body: response,
+      body,
     });
 
     core.debug(JSON.stringify(commentResponse.data));

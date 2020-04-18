@@ -7,17 +7,18 @@ branding:
   color: green
 
 inputs:
-  num-questions: # amount of questions per category
-    description: "How many questions to be generated per category"
+  num-categories:
+    description: "Desired quantity of question categories"
+    required: true
+    default: "3"
+  num-questions:
+    description: "Number of questions to be generated per category"
     required: true
     default: "1"
-  label: # the label that when applied triggers this workflow
+  label:
     description: "The label to trigger this workflow"
     required: true
     default: "1on1"
-outputs:
-  respone:
-    description: "The issue response"
 runs:
   using: "node12"
   main: "index.js"

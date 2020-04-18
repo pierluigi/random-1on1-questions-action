@@ -1,8 +1,6 @@
 on:
   issues:
     types: [opened]
-env:
-  label: "1on1-test" # Set this to be able to skip the steps based on the label
 jobs:
   questions:
     runs-on: ubuntu-latest
@@ -11,10 +9,10 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
       - name: Generate questions
-        if: contains(github.event.issue.labels.*.name, env.label)
         id: questions
         uses: ./
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          # num-questions: "2"
-          label: ${{env.label}}
+          # num-categories: "3"
+          # num-questions: "1"
+          # label: "1on1"
