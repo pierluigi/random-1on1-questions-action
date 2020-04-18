@@ -14,6 +14,7 @@ function generateQuestions(numCategories, numQuestions) {
 
   const flattened = _.flatten(_.sampleSize(qByCategory, numCategories));
   const randomCategories = groupByCategory(flattened);
+
   const qs = _.reduce(
     randomCategories,
     function (memo, curr) {
@@ -23,15 +24,11 @@ function generateQuestions(numCategories, numQuestions) {
     []
   );
 
-  _.reduce(
-    groupByCategory(qs),
-    (memo, q, c) => {
-      let r = memo + `\n\n## ${c}\n`;
-      r += q.map((curr) => `- ${curr.question}`).join(`\n`);
-      response += r;
-    },
-    ""
-  );
+  _.each(groupByCategory(qs), (q, c) => {
+    let r = `\n\n## ${c}\n`;
+    r += q.map((curr) => `- ${curr.question}`).join("\n");
+    response += r;
+  });
 
   return response;
 }
