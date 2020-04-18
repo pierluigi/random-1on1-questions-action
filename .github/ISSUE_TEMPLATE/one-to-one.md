@@ -1,10 +1,9 @@
 ---
 name: One to one
 about: Notes for our 1:1s
-title: '1:1 - [DATE]'
-labels: '1on1-test'
-assignees: ''
-
+title: "1:1 - [DATE]"
+labels: "1on1"
+assignees: ""
 ---
 
 # My mood this week
@@ -14,20 +13,18 @@ assignees: ''
 - [ ] ☁️ Generally OK, except for...
 - [ ] 🌩 Feeling frustrated by...
 
-
 # What happened last week?
 
-- 
+-
 
 # What are we doing this week?
 
-- 
+-
 
 # Potential blockers?
 
-- 
+-
 
 # Action Items
 
-- [ ]  
-
+- [ ]
