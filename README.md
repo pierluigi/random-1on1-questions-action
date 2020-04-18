@@ -4,6 +4,8 @@ This action posts a comment with a list of randomly selected 1-on-1 questions wh
 
 Questions are taken from https://github.com/VGraupera/1on1-questions (for now, copied inside this repo).
 
+![Screenshot](screenshot.png?raw=true "Script in action")
+
 ## Instructions
 
 Define a workflow like this:
