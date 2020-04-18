@@ -46,24 +46,28 @@ ${questions}
   return response;
 }
 
-try {
-  const numQuestions = parseInt(core.getInput("num-questions"));
-  const response = generateQuestions(numQuestions);
-  core.setOutput("response", response);
-  core.info("Response", response);
+async function run() {
+  try {
+    const numQuestions = parseInt(core.getInput("num-questions"));
+    const response = generateQuestions(numQuestions);
+    core.setOutput("response", response);
+    core.info("Response", response);
 
-  const context = github.context,
-    owner = context.repo.owner,
-    client = new github.GitHub(token);
+    const context = github.context,
+      owner = context.repo.owner,
+      client = new github.GitHub(token);
 
-  const commentResponse = await client.issues.createComment({
-    issue_number: context.issue.number,
-    labels: [label],
-    owner,
-    body: response
-  });
+    const commentResponse = await client.issues.createComment({
+      issue_number: context.issue.number,
+      labels: [label],
+      owner,
+      body: response
+    });
 
-  core.debug(JSON.stringify(commentResponse.data));
-} catch (error) {
-  core.setFailed(error.message);
+    core.debug(JSON.stringify(commentResponse.data));
+  } catch (error) {
+    core.setFailed(error.message);
+  }
 }
+
+run();
