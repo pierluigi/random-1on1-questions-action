@@ -21,4 +21,4 @@ inputs:
     default: "1on1"
 runs:
   using: "node12"
-  main: "index.js"
+  main: "main.js"
