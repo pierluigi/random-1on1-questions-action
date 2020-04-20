@@ -22,7 +22,6 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
       - name: Generate questions
-        id: questions
         uses: pierluigi/random-1on1-questions-action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
