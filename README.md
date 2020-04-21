@@ -22,7 +22,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
       - name: Generate questions
-        uses: pierluigi/random-1on1-questions-action@v1
+        uses: pierluigi/random-1on1-questions-action@v1.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           # Optional: ovverride these defaults
@@ -69,7 +69,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Generate random questions
       if: success()
-      uses: ./
+      uses: pierluigi/random-1on1-questions-action@v1.1
       with:
         issue-number: ${{ steps.issue-bot.outputs.issue-number }}
         github-token: ${{ secrets.GITHUB_TOKEN }}
