@@ -19,6 +19,9 @@ inputs:
     description: "The label to trigger this workflow"
     required: true
     default: "1on1"
+  issue-number:
+    description: "(Optional) the issue number to fetch if responding to a different event"
+    required: false
 runs:
   using: "node12"
   main: "main.js"
