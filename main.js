@@ -22,11 +22,12 @@ async function run() {
       issue_number = issueNumberInput;
       console.log(issue_number);
 
-      issue = await client.issues.get({
+      const issueResponse = await client.issues.get({
         issue_number,
         repo,
         owner,
       });
+      issue = issueResponse.data;
     } else {
       core.setFailed("No issue or issue number present");
     }
