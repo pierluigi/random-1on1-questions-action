@@ -22,7 +22,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
       - name: Generate questions
-        uses: pierluigi/random-1on1-questions-action@v1.1
+        uses: pierluigi/random-1on1-questions-action@v1.3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           # Optional: ovverride these defaults
@@ -40,16 +40,17 @@ A more complete scenario is using the [issue-bot](https://github.com/imjohnbo/is
 name: Weekly one to one
 on:
   schedule:
-  - cron: 0 12 * * 7  # Every sunday at noon – https://crontab.guru     
+  - cron: 0 12 * * 1  # Every monday at noon – https://crontab.guru
 
 jobs:
   weekly_meeting:
     name: create new issue
     runs-on: ubuntu-latest
     steps:
-    - name: Set Date
-      run: echo "::set-env name=DATE::$(date -u '+%B %d %Y')"
-
+    - name: H
+      run: date --help
+    - name: Set date to next week
+      run: echo "::set-env name=DATE::$(date -u -d '+6 days' '+%B %d %Y')"
 
     # Repo code checkout required if `template` is used
     - name: Checkout
@@ -60,7 +61,7 @@ jobs:
       uses: imjohnbo/issue-bot@v2
       with:
         title: "1:1 for ${{ env.DATE }}"
-        assignees: "pierluigi" # GitHub handles without the @
+        assignees: "foo, bar" # GitHub handles without the @
         labels: "1on1"
         pinned: true
         close-previous: true
@@ -69,7 +70,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Generate random questions
       if: success()
-      uses: pierluigi/random-1on1-questions-action@v1.1
+      uses: pierluigi/random-1on1-questions-action@v1.3
       with:
         issue-number: ${{ steps.issue-bot.outputs.issue-number }}
         github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -77,6 +78,7 @@ jobs:
         # num-categories: "3" # how many question categories
         # num-questions: "1" # how many questions per category
         # label: "1on1" # which label triggers this workflow
+
 
 ```
 
