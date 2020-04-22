@@ -21,7 +21,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "ncc build main.js -o dist"
+      "pre-push": "ncc build main.js -o dist && git add . && git commit -m 'Build'"
     }
   }
 }
