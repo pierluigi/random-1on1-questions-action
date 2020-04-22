@@ -1,5 +1,6 @@
 const fs = require("fs"),
   _ = require("lodash");
+
 const q = require("./questions.json");
 const groupBy = _.curryRight(_.groupBy);
 const groupByCategory = groupBy((q) => q.category);
