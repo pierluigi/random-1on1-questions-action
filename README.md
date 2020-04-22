@@ -47,8 +47,6 @@ jobs:
     name: create new issue
     runs-on: ubuntu-latest
     steps:
-    - name: H
-      run: date --help
     - name: Set date to next week
       run: echo "::set-env name=DATE::$(date -u -d '+6 days' '+%B %d %Y')"
 
