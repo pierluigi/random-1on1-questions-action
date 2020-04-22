@@ -38,7 +38,7 @@ bower_components
 build/Release
 
 # Dependency directories  - these are needed by the action to run https://help.github.com/en/actions/building-actions/creating-a-javascript-action
-# node_modules/
+node_modules/
 jspm_packages/
 
 # TypeScript v1 declaration files
@@ -80,7 +80,7 @@ typings/
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+# dist
 
 # Gatsby files
 .cache/

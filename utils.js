@@ -1,18 +1,10 @@
 const fs = require("fs"),
   _ = require("lodash");
-
-// Debug info
-const currentFolder = './';
-fs.readdirSync(currentFolder).forEach(file => {
-  console.log(file);
-});
-
+const q = require("./questions.json");
 const groupBy = _.curryRight(_.groupBy);
 const groupByCategory = groupBy((q) => q.category);
-const qFile = "./questions.json";
 
 function generateQuestions(numCategories, numQuestions) {
-  var q = JSON.parse(fs.readFileSync(qFile, "utf8"));
   const qByCategory = groupByCategory(q);
   let response = `# Random 1 on 1 Questions
     
