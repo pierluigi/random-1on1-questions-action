@@ -1,6 +1,12 @@
 const fs = require("fs"),
   _ = require("lodash");
 
+// Debug info
+const currentFolder = './';
+fs.readdirSync(currentFolder).forEach(file => {
+  console.log(file);
+});
+
 const groupBy = _.curryRight(_.groupBy);
 const groupByCategory = groupBy((q) => q.category);
 const qFile = "./questions.json";
