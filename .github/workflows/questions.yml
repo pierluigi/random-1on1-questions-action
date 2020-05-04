@@ -3,6 +3,7 @@ on:
     types: [opened]
 jobs:
   questions:
+    if: github.actor == pierluigi
     runs-on: ubuntu-latest
     name: Generate random questions
     steps:
